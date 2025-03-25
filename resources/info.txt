@@ -1,0 +1,19 @@
+
+Few functions related to Array Creation & Initialization (15 Functions)
+
+Function	         Description
+np.array()	         Create an array from a list or tuple
+np.zeros()	         Create an array filled with zeros
+np.ones()	         Create an array filled with ones
+np.full()	         Create an array filled with a specific value
+np.empty()	         Create an empty array (uninitialized values)
+np.arange()	         Create an array with a range of values
+np.linspace()	     Create an array with evenly spaced values
+np.logspace()	     Create logarithmically spaced values
+np.meshgrid()	     Create coordinate matrices from coordinate vectors
+np.eye()	         Create an identity matrix
+np.identity()	     Create an identity matrix (similar to eye())
+np.diag()	         Create a diagonal matrix
+np.tri()	         Create a lower triangular matrix
+np.random.rand()	 Generate uniform random numbers
+np.random.randint()	 Generate random integers
