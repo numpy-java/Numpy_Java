@@ -1,19 +1,235 @@
 
 Few functions related to Array Creation & Initialization (15 Functions)
 
-Function	         Description
-np.array()	         Create an array from a list or tuple
-np.zeros()	         Create an array filled with zeros
-np.ones()	         Create an array filled with ones
-np.full()	         Create an array filled with a specific value
-np.empty()	         Create an empty array (uninitialized values)
-np.arange()	         Create an array with a range of values
-np.linspace()	     Create an array with evenly spaced values
-np.logspace()	     Create logarithmically spaced values
-np.meshgrid()	     Create coordinate matrices from coordinate vectors
-np.eye()	         Create an identity matrix
-np.identity()	     Create an identity matrix (similar to eye())
-np.diag()	         Create a diagonal matrix
-np.tri()	         Create a lower triangular matrix
-np.random.rand()	 Generate uniform random numbers
-np.random.randint()	 Generate random integers
+1. np.array() - Create an array from a list, tuple, or another array
+
+Syntax:
+np.array(object, dtype=None, copy=True, order='K', subok=False, ndmin=0)
+
+Arguments:
+object: Input data (list, tuple, or another array).
+dtype: Data type (optional, e.g., np.int32).
+copy: Whether to copy (True) or reference (False) the object.
+order: Memory layout ('C' for row-major, 'F' for column-major).
+subok: Allows creation of subclasses (False by default).
+ndmin: Minimum number of dimensions.
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3], dtype=np.float64)
+
+Code:
+
+
+
+2. np.zeros() - Create an array filled with zeros
+
+Syntax:
+np.zeros(shape, dtype=float, order='C')
+
+Arguments:
+shape: Tuple specifying dimensions (e.g., (3,4) for a 3×4 matrix).
+dtype: Data type (float by default).
+order: Memory order ('C' for row-major, 'F' for column-major).
+
+Example:
+zeros_array = np.zeros((2, 3), dtype=int)
+
+Code:
+
+
+3. np.ones() - Create an array filled with ones
+
+Syntax:
+np.ones(shape, dtype=float, order='C')
+
+Arguments: (Same as np.zeros())
+shape
+dtype
+order
+
+Example:
+ones_array = np.ones((3, 3), dtype=np.float32)
+
+Code:
+
+
+4. np.full() - Create an array filled with a specific value
+
+Syntax:
+np.full(shape, fill_value, dtype=None, order='C')
+
+Arguments:
+shape: Dimensions of the array.
+fill_value: Value to fill the array with.
+dtype: Optional data type.
+order: Memory layout.
+
+Example:
+full_array = np.full((2, 2), 7)
+
+Code:
+
+
+5. np.empty() - Create an uninitialized array
+Syntax:
+np.empty(shape, dtype=float, order='C')
+
+Example:
+empty_array = np.empty((3, 3))
+Note: Values in the array are uninitialized (random memory values).
+
+6. np.arange() - Create an array with a range of values
+
+Syntax:
+np.arange(start, stop, step=1, dtype=None)
+
+Arguments:
+start: Start of the interval.
+stop: End of the interval (exclusive).
+step: Spacing between values (default is 1).
+dtype: Optional data type.
+
+Example:
+range_array = np.arange(0, 10, 2)
+
+
+7. np.linspace() - Create evenly spaced values
+
+Syntax:
+np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
+
+Arguments:
+start, stop: Range of values.
+num: Number of values (default 50).
+endpoint: Include stop value (True by default).
+retstep: Return the spacing between values.
+dtype: Data type.
+
+Example:
+linear_space = np.linspace(0, 1, 5)
+
+
+8. np.logspace() - Create logarithmically spaced values
+Syntax:
+np.logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None)
+
+Arguments: (Similar to np.linspace(), but values are logarithmic.)
+start, stop, num, endpoint, dtype
+base: Logarithmic base (default is 10).
+
+Example:
+log_space = np.logspace(1, 3, num=5, base=10)
+
+
+9. np.meshgrid() - Create coordinate matrices from coordinate vectors
+
+Syntax:
+np.meshgrid(*xi, indexing='xy')
+
+Arguments:
+*xi: One or more coordinate vectors.
+indexing: 'xy' for Cartesian indexing, 'ij' for matrix indexing
+
+Example:
+x = np.array([1, 2, 3])
+y = np.array([4, 5])
+X, Y = np.meshgrid(x, y)
+
+
+10. np.eye() - Create an identity matrix
+Syntax:
+np.eye(N, M=None, k=0, dtype=float, order='C')
+
+Arguments:
+N, M: Rows and columns (M defaults to N).
+k: Diagonal shift (default 0).
+dtype, order.
+
+Example:
+identity_matrix = np.eye(3)
+
+11. np.identity() - Create an identity matrix (simplified eye())
+Syntax:
+np.identity(n, dtype=None)
+
+Argument	Description
+n	Number of rows and columns (square matrix of size n × n).
+dtype	Data type of the output array (default: float).
+
+Example:
+identity = np.identity(4)
+
+
+12. np.diag() - Create a diagonal matrix
+Syntax:
+np.diag(v, k=0)
+
+Arguments:
+v: 1D array (to form diagonal) or 2D matrix.
+k: Diagonal shift.
+
+Example:
+diag_matrix = np.diag([1, 2, 3])
+
+
+13. np.tri() - Create a lower triangular matrix
+
+Syntax:
+np.tri(N, M=None, k=0, dtype=float)
+
+N	Number of rows in the matrix.
+M	Number of columns (default: N, creating a square matrix).
+k	Diagonal shift:
+  - k=0 → main diagonal
+  - k>0 → superdiagonal (above the main diagonal)
+  - k<0 → subdiagonal (below the main diagonal)
+dtype	Data type of the output matrix (default: float).
+
+
+Example:
+tri_matrix = np.tri(4, 4, k=0, dtype=int)
+
+
+14. np.random.rand() - Generate uniform random numbers
+
+Syntax:
+np.random.rand(d0, d1, ..., dn)
+
+Generates an array of shape (d0, d1, ..., dn), filled with random values in the range [0, 1).
+
+Example:
+rand_array = np.random.rand(2, 3)
+
+
+
+ 15. np.random.randint() - Generate random integers
+
+Syntax:
+np.random.randint(low, high=None, size=None, dtype=int)
+
+Arguments:
+low, high: Range (high is optional; defaults to [0, low]).
+size: Shape of output array.
+dtype: Default is int.
+
+Example:
+rand_ints = np.random.randint(1, 10, (3, 3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
