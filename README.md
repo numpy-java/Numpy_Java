@@ -1,4 +1,4 @@
-# Numpy_Java
+# Numjava
 creating the numpy libraries in java  
 - [ref-1](https://www.freecodecamp.org/news/how-to-maintain-an-open-source-project/)
 - [ref-2](https://www.reddit.com/r/opensource/comments/16q15w5/how_to_maintain_a_big_free_open_source_project/)
