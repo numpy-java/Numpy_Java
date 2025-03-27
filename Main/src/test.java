@@ -15,6 +15,23 @@ public class test {
         b.set(1, 0, 7);
         b.set(1, 1, 8);
 
+
+        NumJava c = new NumJava(2);
+        c.set(0,9);
+        c.set(1,8);
+
+        NumJava d = new NumJava(2);
+        d.set(0,7);
+        d.set(1,6);
+
+
+        System.out.println("testing for 1D array sum");
+        NumJava result1D=Operations.add(d,c);
+
+        result1D.print();
+        //System.out.println(result1D);
+        //c.print();
+        System.out.println("2D array sum");
         NumJava result = Operations.add(a, b);
         result.print();
     }

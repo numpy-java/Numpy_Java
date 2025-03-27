@@ -9,15 +9,28 @@ public class NumJava {
         this.cols = cols;
         this.data = new double[rows][cols];
     }
+    public NumJava(int rows) {
+        this.rows = rows;
+        this.cols = 1;
+        this.data = new double[rows][1];
+    }
 
+
+    public void set(int row,  double value) {data[row][0] = value;} //for 1D array
 
     public void set(int row, int col, double value) {
         data[row][col] = value;
     }
 
+  //  public double get(int row ) {
+      //  return data[row][0];
+   // } //for 1D array
+
     public double get(int row, int col) {
         return data[row][col];
     }
+
+
 
     public void print() {
         for (double[] row : data) {
