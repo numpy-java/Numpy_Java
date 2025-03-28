@@ -34,5 +34,7 @@ public class test {
         System.out.println("2D array sum");
         NumJava result = Operations.add(a, b);
         result.print();
+        NumJava e = new NumJava("1,2,3,5,7,4");
+        e.print();
     }
 }
