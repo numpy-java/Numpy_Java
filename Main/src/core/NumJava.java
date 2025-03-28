@@ -15,7 +15,7 @@ public class NumJava {
         this.data = new double[rows][1];
     }
     public NumJava(String value){
-        String[] values = value.split("[}, ]");
+        String[] values = value.split("[, ]");
         this.data = new double[values.length][1];
         for (int i = 0; i < values.length; i++) {
             this.data[i][0]=Integer.parseInt(values[i].trim());
