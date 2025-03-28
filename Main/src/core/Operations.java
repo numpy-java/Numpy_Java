@@ -16,4 +16,21 @@ public class Operations {
         }
         return result;
     }
+    public static double[][] zeros(int row, int cols){
+        double[][] arr_zeros = new double[row][cols];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < cols; j++) {
+                arr_zeros[i][j]=0;
+            }
+        }
+        return arr_zeros;
+    }
+    public static double[] zeros(int row){
+        double[] arr_zeros = new double[row];
+        for (int i = 0; i < row; i++) {
+                arr_zeros[i]=0;
+        }
+        return arr_zeros;
+    }
+
 }
