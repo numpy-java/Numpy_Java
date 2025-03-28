@@ -1,6 +1,6 @@
 package core;
 
-public class NumJava {
+public class NumJava extends Operations {
     private double[][] data;
     private int rows, cols;
 
