@@ -22,6 +22,7 @@ public class NumJava extends Operations {
         }
     }
 
+
     public void set(int row,  double value) {data[row][0] = value;} //for 1D array
 
     public void set(int row, int col, double value) {
