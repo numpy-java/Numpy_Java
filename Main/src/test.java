@@ -42,6 +42,9 @@ public class test {
         System.out.println(Arrays.deepToString(NumJava.zeros(2,3)));
         System.out.println(Arrays.toString(NumJava.zeros(2)));
 
+        // implementing np.ones
+        System.out.println(Arrays.deepToString(NumJava.ones(2,3)));
+        System.out.println(Arrays.toString(NumJava.ones(2)));
 
 
     }

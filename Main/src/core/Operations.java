@@ -32,5 +32,21 @@ public class Operations {
         }
         return arr_zeros;
     }
+    public static double[][] ones(int row, int cols){
+        double[][] arr_ones = new double[row][cols];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < cols; j++) {
+                arr_ones[i][j]=1;
+            }
+        }
+        return arr_ones;
+    }
+    public static double[] ones(int row){
+        double[] arr_ones = new double[row];
+        for (int i = 0; i < row; i++) {
+            arr_ones[i]=1;
+        }
+        return arr_ones;
+    }
 
 }
