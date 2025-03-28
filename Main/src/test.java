@@ -1,6 +1,8 @@
 import core.NumJava;
 import core.Operations;
 
+import java.util.Arrays;
+
 public class test {
     public static void main(String[] args) {
         NumJava a = new NumJava(2, 2);
@@ -32,7 +34,15 @@ public class test {
         //System.out.println(result1D);
         //c.print();
         System.out.println("2D array sum");
-        NumJava result = Operations.add(a, b);
+        NumJava result = NumJava.add(a, b);
         result.print();
+        NumJava e = new NumJava("1,2,3,5,7,4");
+        e.print();
+        //implementing zeros
+        System.out.println(Arrays.deepToString(NumJava.zeros(2,3)));
+        System.out.println(Arrays.toString(NumJava.zeros(2)));
+
+
+
     }
 }

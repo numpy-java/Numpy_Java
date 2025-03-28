@@ -1,6 +1,6 @@
 package core;
 
-public class NumJava {
+public class NumJava extends Operations {
     private double[][] data;
     private int rows, cols;
 
@@ -14,7 +14,13 @@ public class NumJava {
         this.cols = 1;
         this.data = new double[rows][1];
     }
-
+    public NumJava(String value){
+        String[] values = value.split("[, ]");
+        this.data = new double[values.length][1];
+        for (int i = 0; i < values.length; i++) {
+            this.data[i][0]=Integer.parseInt(values[i].trim());
+        }
+    }
 
     public void set(int row,  double value) {data[row][0] = value;} //for 1D array
 
@@ -22,7 +28,8 @@ public class NumJava {
         data[row][col] = value;
     }
 
-  //  public double get(int row ) {
+
+    //  public double get(int row ) {
       //  return data[row][0];
    // } //for 1D array
 
