@@ -35,7 +35,7 @@ public class Operations {
     public static double[][] ones(int rows, int cols) {
         double[][] data = new double[rows][cols];
         for(int i = 0;i<rows;i++){
-            for(int j = 0; j <cols; j++){
+            for(int j = 0; j < cols; j++){
                 data[i][j]=1;
             }
         }
