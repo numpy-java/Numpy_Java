@@ -39,10 +39,14 @@ public class test {
         NumJava e = new NumJava("1,2,3,5,7,4");
         e.print();
         //implementing zeros
+        System.out.println("zeros");
+        System.out.println(Arrays.deepToString(NumJava.zeros(2,3)));
+        System.out.println(Arrays.toString(NumJava.zeros(2)));
+
+        //implementing ones
+        System.out.println("ones");
         System.out.println(Arrays.deepToString(NumJava.ones(2,3)));
         System.out.println(Arrays.toString(NumJava.ones(2)));
-
-
 
     }
 }
