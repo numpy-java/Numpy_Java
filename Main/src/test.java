@@ -48,5 +48,13 @@ public class test {
         System.out.println(Arrays.deepToString(NumJava.ones(2,3)));
         System.out.println(Arrays.toString(NumJava.ones(2)));
 
+        //implementing full
+        System.out.println("given value");
+        System.out.println(Arrays.deepToString(NumJava.full(2,3,8)));
+        System.out.println(Arrays.toString(NumJava.full(2,8)));
+
+        //implementing arange
+        System.out.println("arange");
+        System.out.println(Arrays.toString(NumJava.arange(1,10,2)));
     }
 }

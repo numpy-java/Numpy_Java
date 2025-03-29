@@ -48,5 +48,29 @@ public class Operations {
         }
         return data;
     }
-
+    public static double[][] full(int rows, int cols, int value) {
+        double[][] data = new double[rows][cols];
+        for(int i = 0;i<rows;i++){
+            for(int j = 0; j < cols; j++){
+                data[i][j]=value;
+            }
+        }
+        return data;
+    }
+    public static double[] full(int rows, int value) {
+        double[] data = new double[rows];
+        for(int i = 0; i <rows; i++){
+            data[i]=value;
+        }
+        return data;
+    }
+    public static double[] arange(int start, int stop, int step) {
+        int rows = (stop - start) / step + 1;
+        double[] data = new double[rows];
+        for (int i = 0; i < rows; i++) {
+            data[i] = start;
+            start += step;
+        }
+        return data;
+    }
 }
