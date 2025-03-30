@@ -71,6 +71,15 @@ public class test {
 
         //implementing eye
         System.out.println("eye");
+        for (float[] i : NumJava.eye(4,5, -1)) {
+            for (double j : i) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+
+        //implementing eye
+        System.out.println("eye");
         for (float[] i : NumJava.eye(4, -1)) {
             for (double j : i) {
                 System.out.print(j + " ");
@@ -80,13 +89,27 @@ public class test {
 
         //implementing identity
         System.out.println("identity");
-        System.out.println(Arrays.deepToString(NumJava.identity(5)));
+        for (float[] i : NumJava.identity(4)) {
+            for (double j : i) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
 
-        //implementing eye
+        //implementing random.randint
         System.out.println("random.randint(low,high,row,column)");
         for (int[] i : NumJava.random_randint(2, 9, 3, 3))
             System.out.print(Arrays.toString(i) +" ");
         System.out.println();
+
+        //implementing ltri
+        System.out.println("lower triangle");
+        for (float[] i : NumJava.ltri(4,4, -2)) {
+            for (double j : i) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
