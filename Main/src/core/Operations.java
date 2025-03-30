@@ -222,7 +222,7 @@ public class Operations {
                 }
                 if (k>0){
                     if (i>=j-k){
-                        arr_ltri[i][j]=1;
+                        arr_ltri[i][j]=1 ;
                     }
                     else {
                         arr_ltri[i][j]=0;
