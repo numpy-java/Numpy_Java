@@ -67,5 +67,18 @@ public class test {
             }
             System.out.println();
         }
+
+        //implementing random.randint
+        System.out.println("random.randint(high,low,row,column)");
+        for (int[] i : NumJava.random_randint(2,9,3,3)) {
+            for (int j : i) {
+                System.out.print(j+" ");
+            }
+            System.out.println();
+        }
+        System.out.println("random.randint(high,size)");
+        for (int i : NumJava.random_randint(4,3))
+                System.out.print(i+" ");
+            System.out.println();
     }
 }
