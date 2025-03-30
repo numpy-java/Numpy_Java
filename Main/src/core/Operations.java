@@ -130,7 +130,7 @@ public class Operations {
                     }
                 }
                 if (k<0){
-                    if (i==j+k){
+                    if (i==j-k){
                         arr_eye[i][j]=1;
                     }
                     else {
@@ -162,7 +162,7 @@ public class Operations {
                     }
                 }
                 if (k<0){
-                    if (i==j+k){
+                    if (i==j-k){
                         arr_eye[i][j]=1;
                     }
                     else {
@@ -172,6 +172,20 @@ public class Operations {
             }
         }
         return arr_eye;
+    }
+    public static float[][] identity(int row){
+        float[][] arr_identity = new float[row][row];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
+                if (i==j){
+                    arr_identity[i][j]=1;
+                }
+                else {
+                    arr_identity[i][j]=0;
+                }
+            }
+        }
+        return arr_identity;
     }
 
 }

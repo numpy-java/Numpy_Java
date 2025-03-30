@@ -74,8 +74,11 @@ public class test {
 
         //implementing eye
         System.out.println("eye");
-        System.out.println(Arrays.deepToString(NumJava.eye(2, 3, 8)));
-        System.out.println(Arrays.deepToString(NumJava.eye(4, 0)));
+        System.out.println(Arrays.deepToString(NumJava.eye(5, 6, 2)));
+        System.out.println(Arrays.deepToString(NumJava.eye(4, -1)));
 
+        //implementing identity
+        System.out.println("identity");
+        System.out.println(Arrays.deepToString(NumJava.identity(5)));
     }
 }
