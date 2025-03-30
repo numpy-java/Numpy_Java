@@ -1,17 +1,15 @@
 import core.NumJava;
 import core.Operations;
-import java.util.Scanner;
 
 import java.util.Arrays;
 
 public class test {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         NumJava a = new NumJava(2, 2);
         a.set(0, 0, 1);
         a.set(0, 1, 2);
         a.set(1, 0, 3);
-        a.set(1, 1, 3);
+        a.set(1, 1, 4);
 
         NumJava b = new NumJava(2, 2);
         b.set(0, 0, 5);
@@ -21,16 +19,16 @@ public class test {
 
 
         NumJava c = new NumJava(2);
-        c.set(0, 9);
-        c.set(1, 8);
+        c.set(0,9);
+        c.set(1,8);
 
         NumJava d = new NumJava(2);
-        d.set(0, 7);
-        d.set(1, 6);
+        d.set(0,7);
+        d.set(1,6);
 
 
         System.out.println("testing for 1D array sum");
-        NumJava result1D = Operations.add(d, c);
+        NumJava result1D=Operations.add(d,c);
 
         result1D.print();
         //System.out.println(result1D);
@@ -39,7 +37,6 @@ public class test {
         NumJava result = NumJava.add(a, b);
         result.print();
         NumJava e = new NumJava("1,2,3,5,7,4");
-        e.print();
         //implementing zeros
         System.out.println("zeros");
         System.out.println(Arrays.deepToString(NumJava.zeros(2, 3)));
@@ -74,8 +71,12 @@ public class test {
 
         //implementing eye
         System.out.println("eye");
-        System.out.println(Arrays.deepToString(NumJava.eye(5, 6, 2)));
-        System.out.println(Arrays.deepToString(NumJava.eye(4, -1)));
+        for (float[] i : NumJava.eye(4, -1)) {
+            for (double j : i) {
+                System.out.print(j+" ");
+            }
+            System.out.println();
+        }
 
         //implementing identity
         System.out.println("identity");
