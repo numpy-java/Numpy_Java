@@ -73,4 +73,25 @@ public class Operations {
         }
         return data;
     }
+    public static double[][] eye(int N, int M, int k){
+        double[][] matrix = new double[N][M];
+        for (int i = 0; i < N; i++) {
+            int j = i + k;
+            if (j >= 0 && j < M) {
+                matrix[i][j] = 1.0;
+            }
+        }
+        return matrix;
+    }
+    public static double[][] eye(int N, int M){
+        int k=0;
+        double[][] matrix = new double[N][M];
+        for (int i = 0; i < N; i++) {
+            int j = i + k;
+            if (j >= 0 && j < M) {
+                matrix[i][j] = 1.0;
+            }
+        }
+        return matrix;
+    }
 }
