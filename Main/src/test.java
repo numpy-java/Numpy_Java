@@ -59,13 +59,23 @@ public class test {
         System.out.println("arange");
         System.out.println(Arrays.toString(NumJava.arange(1, 10, 2)));
 
+        //implementing empty
+        System.out.println("empty");
+        System.out.println(Arrays.deepToString(NumJava.empty(2, 3)));
+        System.out.println(Arrays.toString(NumJava.empty(2)));
+
+        //implementing linspace
+        System.out.println("linspace");
+        System.out.println(Arrays.toString(NumJava.linspace(1, 10, 5)));
+
+        //implementing logspace
+        System.out.println("logspace");
+        System.out.println(Arrays.toString(NumJava.logspace(1, 3, 5,10)));
+
         //implementing eye
         System.out.println("eye");
-        for (double[] i : NumJava.eye(2, 3)) {
-            for (double j : i) {
-                System.out.print(j+" ");
-            }
-            System.out.println();
-        }
+        System.out.println(Arrays.deepToString(NumJava.eye(2, 3, 8)));
+        System.out.println(Arrays.deepToString(NumJava.eye(4, 0)));
+
     }
 }
