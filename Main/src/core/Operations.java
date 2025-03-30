@@ -73,25 +73,119 @@ public class Operations {
         }
         return data;
     }
-    public static double[][] eye(int N, int M, int k){
-        double[][] matrix = new double[N][M];
-        for (int i = 0; i < N; i++) {
-            int j = i + k;
-            if (j >= 0 && j < M) {
-                matrix[i][j] = 1.0;
+    public static float[][] empty(int row, int cols){
+        float[][] arr_empty = new float[row][cols];
+       // for (int i = 0; i < row; i++) {
+       //     for (int j = 0; j < cols; j++) {
+       //         arr_empty[i][j]= 0;
+       //     }
+       // }
+        return arr_empty;
+    }
+    public static float[] empty(int row){
+        float[] arr_empty = new float[row];
+        //for (int i = 0; i < row; i++) {
+        //    arr_empty[i]= 0;
+        //}
+        return arr_empty;
+    }
+    public static double[] linspace(double start, double stop, int num) {
+        double diff = (stop - start) / (num - 1);
+        double[] data = new double[num];
+        for (int i = 0; i < num; i++) {
+            data[i] = start;
+            start += diff;
+        }
+        return data;
+    }
+    public static double[] logspace(double start, double stop, int num, double base) {
+
+        double diff = (Math.pow(base,stop)- Math.pow(base,start)) / (num - 1);
+        double st=Math.pow(base,start);
+        double[] data = new double[num];
+        for (int i = 0; i < num; i++) {
+            data[i] = st;
+            st += diff;
+        }
+        return data;
+    }
+    public static float[][] eye(int row, int cols, int k){
+        float[][] arr_eye = new float[row][cols];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (k==0){
+                    if (i==j){
+                        arr_eye[i][j]=1;
+                    }
+                    else {
+                        arr_eye[i][j]=0;
+                    }
+                }
+                if (k>0){
+                    if (i==j-k){
+                        arr_eye[i][j]=1;
+                    }
+                    else {
+                        arr_eye[i][j]=0;
+                    }
+                }
+                if (k<0){
+                    if (i==j-k){
+                        arr_eye[i][j]=1;
+                    }
+                    else {
+                        arr_eye[i][j]=0;
+                    }
+                }
             }
         }
-        return matrix;
+        return arr_eye;
     }
-    public static double[][] eye(int N, int M){
-        int k=0;
-        double[][] matrix = new double[N][M];
-        for (int i = 0; i < N; i++) {
-            int j = i + k;
-            if (j >= 0 && j < M) {
-                matrix[i][j] = 1.0;
+    public static float[][] eye(int row, int k){
+        float[][] arr_eye = new float[row][row];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
+                if (k==0){
+                    if (i==j){
+                        arr_eye[i][j]=1;
+                    }
+                    else {
+                        arr_eye[i][j]=0;
+                    }
+                }
+                if (k>0){
+                    if (i==j-k){
+                        arr_eye[i][j]=1;
+                    }
+                    else {
+                        arr_eye[i][j]=0;
+                    }
+                }
+                if (k<0){
+                    if (i==j-k){
+                        arr_eye[i][j]=1;
+                    }
+                    else {
+                        arr_eye[i][j]=0;
+                    }
+                }
             }
         }
-        return matrix;
+        return arr_eye;
     }
+    public static float[][] identity(int row){
+        float[][] arr_identity = new float[row][row];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < row; j++) {
+                if (i==j){
+                    arr_identity[i][j]=1;
+                }
+                else {
+                    arr_identity[i][j]=0;
+                }
+            }
+        }
+        return arr_identity;
+    }
+
 }
