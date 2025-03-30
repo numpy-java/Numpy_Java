@@ -1,5 +1,7 @@
 package core;
 
+import java.util.Random;
+
 public class Operations {
 
     public static NumJava add(NumJava a, NumJava b) {
@@ -187,5 +189,23 @@ public class Operations {
         }
         return arr_identity;
     }
+    public static int[][] random_randint(int low, int high, int rows, int cols){
+        Random rand = new Random();
+        int[][] matrix = new int[rows][cols];
 
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++)
+                matrix[i][j] = rand.nextInt(high - low) + low;
+        }
+        return matrix;
+    }
+    public static int[] random_randint(int high, int size) {
+        Random rand = new Random();
+        int[] matrix = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            matrix[i] = rand.nextInt(high);
+        }
+        return matrix;
+    }
 }
