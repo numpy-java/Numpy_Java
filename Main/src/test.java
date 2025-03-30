@@ -19,16 +19,16 @@ public class test {
 
 
         NumJava c = new NumJava(2);
-        c.set(0,9);
-        c.set(1,8);
+        c.set(0, 9);
+        c.set(1, 8);
 
         NumJava d = new NumJava(2);
-        d.set(0,7);
-        d.set(1,6);
+        d.set(0, 7);
+        d.set(1, 6);
 
 
         System.out.println("testing for 1D array sum");
-        NumJava result1D=Operations.add(d,c);
+        NumJava result1D = Operations.add(d, c);
 
         result1D.print();
         //System.out.println(result1D);
@@ -67,13 +67,13 @@ public class test {
 
         //implementing logspace
         System.out.println("logspace");
-        System.out.println(Arrays.toString(NumJava.logspace(1, 3, 5,10)));
+        System.out.println(Arrays.toString(NumJava.logspace(1, 3, 5, 10)));
 
         //implementing eye
         System.out.println("eye");
         for (float[] i : NumJava.eye(4, -1)) {
             for (double j : i) {
-                System.out.print(j+" ");
+                System.out.print(j + " ");
             }
             System.out.println();
         }
@@ -81,5 +81,12 @@ public class test {
         //implementing identity
         System.out.println("identity");
         System.out.println(Arrays.deepToString(NumJava.identity(5)));
+
+        //implementing eye
+        System.out.println("random.randint(low,high,row,column)");
+        for (int[] i : NumJava.random_randint(2, 9, 3, 3))
+            System.out.print(Arrays.toString(i) +" ");
+        System.out.println();
     }
 }
+
