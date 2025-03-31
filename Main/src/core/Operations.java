@@ -208,4 +208,36 @@ public class Operations {
         }
         return matrix;
     }
+    public static float[][] ltri(int row, int cols, int k){
+        float[][] arr_ltri = new float[row][cols];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (k==0){
+                    if (i>=j){
+                        arr_ltri[i][j]=1;
+                    }
+                    else {
+                        arr_ltri[i][j]=0;
+                    }
+                }
+                if (k>0){
+                    if (i>=j-k){
+                        arr_ltri[i][j]=1 ;
+                    }
+                    else {
+                        arr_ltri[i][j]=0;
+                    }
+                }
+                if (k<0){
+                    if (i>=j-k){
+                        arr_ltri[i][j]=1;
+                    }
+                    else {
+                        arr_ltri[i][j]=0;
+                    }
+                }
+            }
+        }
+        return arr_ltri;
+    }
 }
