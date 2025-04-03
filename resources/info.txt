@@ -216,6 +216,184 @@ dtype: Default is int.
 Example:
 rand_ints = np.random.randint(1, 10, (3, 3))
 
+16-30 functions
+
+More Commonly Used NumPy Functions (15 Functions)
+
+1. np.reshape() - Change the shape of an array
+
+Syntax:
+np.reshape(a, newshape, order='C')
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6])
+reshaped = np.reshape(arr, (2, 3))
+
+
+
+2. np.ravel() - Flatten an array into 1D
+
+Syntax:
+np.ravel(a, order='C')
+
+Example:
+import numpy as np
+flat_array = np.ravel(np.array([[1, 2], [3, 4]]))
+
+
+
+3. np.transpose() - Transpose an array
+
+Syntax:
+np.transpose(a, axes=None)
+
+Example:
+import numpy as np
+transposed = np.transpose(np.array([[1, 2], [3, 4]]))
+
+
+
+4. np.vstack() - Stack arrays vertically
+
+Syntax:
+np.vstack((a, b, ...))
+
+Example:
+import numpy as np
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+stacked = np.vstack((a, b))
+
+
+
+5. np.hstack() - Stack arrays horizontally
+
+Syntax:
+np.hstack((a, b, ...))
+
+Example:
+import numpy as np
+a = np.array([[1], [2], [3]])
+b = np.array([[4], [5], [6]])
+stacked = np.hstack((a, b))
+
+
+
+6. np.split() - Split an array into multiple sub-arrays
+
+Syntax:
+np.split(ary, indices_or_sections, axis=0)
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6])
+split_arr = np.split(arr, 3)
+
+
+
+7. np.concatenate() - Concatenate multiple arrays
+
+Syntax:
+np.concatenate((a1, a2, ...), axis=0)
+
+Example:
+import numpy as np
+arr1 = np.array([1, 2])
+arr2 = np.array([3, 4])
+concat_arr = np.concatenate((arr1, arr2))
+
+
+
+8. np.unique() - Find unique elements in an array
+
+Syntax:
+np.unique(ar, return_index=False, return_inverse=False, return_counts=False)
+
+Example:
+import numpy as np
+unique_vals = np.unique(np.array([1, 2, 2, 3, 4, 4, 4]))
+
+
+
+9. np.sort() - Sort an array
+
+Syntax:
+np.sort(a, axis=-1, kind=None, order=None)
+
+Example:
+import numpy as np
+sorted_arr = np.sort(np.array([3, 1, 2, 5]))
+
+
+
+10. np.argsort() - Get indices of sorted elements
+
+Syntax:
+np.argsort(a, axis=-1, kind=None, order=None)
+
+Example:
+import numpy as np
+indices = np.argsort(np.array([3, 1, 2, 5]))
+
+
+
+11. np.where() - Get indices where a condition is met
+
+Syntax:
+np.where(condition, x=None, y=None)
+
+Example:
+import numpy as np
+arr = np.array([10, 20, 30, 40])
+indices = np.where(arr > 20)
+
+
+
+12. np.clip() - Clip values to a given range
+
+Syntax:
+np.clip(a, a_min, a_max, out=None)
+
+Example:
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5])
+clipped_arr = np.clip(arr, 2, 4)
+
+
+
+13. np.mean() - Compute the mean (average)
+
+Syntax:
+np.mean(a, axis=None, dtype=None, out=None)
+
+Example:
+import numpy as np
+mean_value = np.mean(np.array([1, 2, 3, 4]))
+
+
+
+14. np.median() - Compute the median
+
+Syntax:
+np.median(a, axis=None, out=None, overwrite_input=False)
+
+Example:
+import numpy as np
+median_value = np.median(np.array([1, 2, 3, 4, 5]))
+
+
+
+15. np.std() - Compute standard deviation
+
+Syntax:
+np.std(a, axis=None, dtype=None, out=None, ddof=0)
+
+Example:
+import numpy as np
+std_dev = np.std(np.array([1, 2, 3, 4]))
+
+.
 
 
 
