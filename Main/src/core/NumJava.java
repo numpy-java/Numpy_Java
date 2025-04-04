@@ -1,67 +1,68 @@
 package core;
 
+import java.util.Arrays;
+
 public class NumJava extends Operations {
-    private double[][] data;
-    private int rows, cols;
+    public static double[] data;
+    private static double[][] data2D;
 
-    public NumJava(int rows, int cols) {
-        this.rows = rows;
-        this.cols = cols;
-        this.data = new double[rows][cols];
-    }
-    public NumJava(int rows) {
-        this.rows = rows;
-        this.cols = 1;
-        this.data = new double[rows][1];
-    }
-    public NumJava(String value){
-        String[] values = value.split("[, ]");
-        this.data = new double[values.length][1];
-        for (int i = 0; i < values.length; i++) {
-            this.data[i][0]=Integer.parseInt(values[i].trim());
-        }
-    }
+    // Parses a string input and converts it into either a 1D or 2D double array
+    public static Object array(String value) {
+        value = value.trim();
 
+        // If input is like [[1, 2], [3, 4]], treat it as 2D array
+        if (value.startsWith("[[") && value.endsWith("]]")) {
+            value = value.substring(2, value.length() - 2);
+            String[] rows = value.split("\\],\\s*\\[");
+            data2D = new double[rows.length][];
 
-    public void set(int row,  double value) {data[row][0] = value;} //for 1D array
-
-    public void set(int row, int col, double value) {
-        data[row][col] = value;
-    }
-
-
-    //  public double get(int row ) {
-      //  return data[row][0];
-   // } //for 1D array
-
-    public double get(int row, int col) {
-        return data[row][col];
-    }
-
-
-
-    public void print() {
-        for (double[] row : data) {
-            for (double val : row) {
-                System.out.print(val + " ");
+            for (int i = 0; i < rows.length; i++) {
+                String[] values = rows[i].trim().split("[, ]+");
+                data2D[i] = new double[values.length];
+                for (int j = 0; j < values.length; j++) {
+                    data2D[i][j] = Double.parseDouble(values[j].trim());
+                }
             }
-            System.out.println();
+            return deepCopy(data2D);
+        }
+
+        // If input is like [1, 2, 3], treat it as 1D array
+        else if (value.startsWith("[") && value.endsWith("]")) {
+            value = value.substring(1, value.length() - 1);
+            String[] values = value.trim().split("[, ]+");
+            data = new double[values.length];
+            for (int i = 0; i < values.length; i++) {
+                data[i] = Double.parseDouble(values[i].trim());
+            }
+            return Arrays.copyOf(data, data.length);
+        }
+
+        // If input is like "1 2 3" or "1,2,3", also treat as 1D array
+        else if (value.matches("[-+]?\\d+(\\.\\d+)?([,\\s]+[-+]?\\d+(\\.\\d+)?)*")) {
+            String[] values = value.trim().split("[, ]+");
+            data = new double[values.length];
+            for (int i = 0; i < values.length; i++) {
+                data[i] = Double.parseDouble(values[i].trim());
+            }
+            return Arrays.copyOf(data, data.length);
+        }
+
+        // Input is invalid if it doesn't match any of the expected formats
+        else {
+            throw new IllegalArgumentException("Invalid array format! Use [1,2], '1 2', or [[1,2],[3,4]]");
         }
     }
 
-    public int getCols() {
-        return cols;
-    }
-
-    public void setCols(int cols) {
-        this.cols = cols;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
+    // Prints the contents of either a 1D or 2D double array to the console
+    public static void print(Object arr) {
+        if (arr instanceof double[]) {
+            System.out.println(Arrays.toString((double[]) arr));
+        } else if (arr instanceof double[][]) {
+            for (double[] row : (double[][]) arr) {
+                System.out.println(Arrays.toString(row));
+            }
+        } else {
+            throw new IllegalArgumentException("Only 1D/2D double arrays are supported.");
+        }
     }
 }
