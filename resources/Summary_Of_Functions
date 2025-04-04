@@ -1,0 +1,89 @@
+### Most Popular NumPy Functions
+
+#### 🔹 Array Creation (6)
+1. `np.array()` – Create an array
+2. `np.zeros()` – Create an array filled with zeros
+3. `np.ones()` – Create an array filled with ones
+4. `np.arange()` – Create an array with a range of values
+5. `np.linspace()` – Create an array with evenly spaced values
+6. `np.eye()` – Create an identity matrix
+
+#### 🔹 Array Manipulation (6)
+7. `np.reshape()` – Reshape an array
+8. `np.ravel()` – Flatten an array
+9. `np.hstack()` – Horizontally stack arrays
+10. `np.vstack()` – Vertically stack arrays
+11. `np.concatenate()` – Concatenate arrays
+12. `np.split()` – Split an array
+
+#### 🔹 Mathematical Operations (6)
+13. `np.add()` – Element-wise addition
+14. `np.subtract()` – Element-wise subtraction
+15. `np.multiply()` – Element-wise multiplication
+16. `np.divide()` – Element-wise division
+17. `np.power()` – Element-wise exponentiation
+18. `np.mod()` – Element-wise modulus
+
+#### 🔹 Statistical Functions (6)
+19. `np.mean()` – Compute the mean
+20. `np.median()` – Compute the median
+21. `np.var()` – Compute the variance
+22. `np.std()` – Compute the standard deviation
+23. `np.sum()` – Sum of elements
+24. `np.prod()` – Compute product of elements
+
+#### 🔹 Indexing & Searching (6)
+25. `np.where()` – Find indices matching a condition
+26. `np.argmax()` – Index of max value
+27. `np.argmin()` – Index of min value
+28. `np.sort()` – Sort an array
+29. `np.unique()` – Find unique elements
+30. `np.nonzero()` – Find indices of nonzero elements
+
+#### 🔹 Linear Algebra (6)
+31. `np.dot()` – Matrix multiplication
+32. `np.linalg.inv()` – Inverse of a matrix
+33. `np.linalg.det()` – Determinant of a matrix
+34. `np.linalg.eig()` – Compute eigenvalues and eigenvectors
+35. `np.linalg.norm()` – Compute matrix norm
+36. `np.linalg.svd()` – Singular value decomposition
+
+#### 🔹 Random Number Generation (6)
+37. `np.random.rand()` – Generate uniform random numbers
+38. `np.random.randn()` – Generate normal distribution numbers
+39. `np.random.randint()` – Generate random integers
+40. `np.random.shuffle()` – Shuffle an array
+41. `np.random.permutation()` – Random permutation
+42. `np.random.choice()` – Random sampling
+
+#### 🔹 Sorting & Filtering (6)
+43. `np.sort()` – Sort an array
+44. `np.argsort()` – Get sorted indices
+45. `np.partition()` – Partition array
+46. `np.searchsorted()` – Find index to insert element
+47. `np.clip()` – Clip values within a range
+48. `np.bincount()` – Count occurrences
+
+#### 🔹 Broadcasting & Vectorization (5)
+49. `np.meshgrid()` – Create coordinate matrices
+50. `np.outer()` – Compute outer product
+51. `np.inner()` – Compute inner product
+52. `np.cumsum()` – Cumulative sum of elements
+53. `np.cumprod()` – Cumulative product of elements
+
+#### 🔹 Boolean Masking & Logical Operations (5)
+54. `np.any()` – Check if any element is `True`
+55. `np.all()` – Check if all elements are `True`
+56. `np.logical_and()` – Logical AND operation
+57. `np.logical_or()` – Logical OR operation
+58. `np.logical_not()` – Logical NOT operation
+
+#### 🔹 File I/O (Loading/Saving Data) (5)
+59. `np.loadtxt()` – Load data from a text file
+60. `np.savetxt()` – Save data to a text file
+61. `np.load()` – Load binary file
+62. `np.save()` – Save binary file
+63. `np.savez()` – Save multiple arrays in a compressed file
+
+These **63** functions cover most essential and commonly used NumPy functionalities! 🚀
+
