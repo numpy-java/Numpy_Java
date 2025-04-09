@@ -1,62 +1,90 @@
-    package core;
+package core;
 
-    import java.util.Arrays;
+import java.util.Arrays;
 
-    public class NumArray extends Operations{
+public class NumArray extends Operations {
 
-        public static Object array(String value) {
-            value = value.trim();
+    public static Object array(String value) {
+        return array(value, DType.INT); // Default to INT
+    }
 
-            if (value.startsWith("[[") && value.endsWith("]]")) {
-                value = value.substring(2, value.length() - 2);
-                String[] rows = value.split("\\],\\s*\\[");
-                double[][] data2D = new double[rows.length][];
+    public static Object array(String value, DType dtype) {
+        value = value.trim();
 
-                for (int i = 0; i < rows.length; i++) {
-                    String[] values = rows[i].trim().split("[, ]+");
-                    data2D[i] = new double[values.length];
-                    for (int j = 0; j < values.length; j++) {
-                        data2D[i][j] = Double.parseDouble(values[j].trim());
+        if (value.startsWith("[[") && value.endsWith("]]")) {
+            value = value.substring(2, value.length() - 2);
+            String[] rows = value.split("\\],\\s*\\[");
+            int rowCount = rows.length;
+
+            switch (dtype) {
+                case FLOAT:
+                    float[][] fData2D = new float[rowCount][];
+                    for (int i = 0; i < rowCount; i++) {
+                        String[] vals = rows[i].trim().split("[, ]+");
+                        fData2D[i] = new float[vals.length];
+                        for (int j = 0; j < vals.length; j++) {
+                            fData2D[i][j] = Float.parseFloat(vals[j]);
+                        }
                     }
-                }
-                return deepCopy(data2D);
-            } else if (value.startsWith("[") && value.endsWith("]")) {
-                value = value.substring(1, value.length() - 1);
-                String[] values = value.trim().split("[, ]+");
-                double[] data = new double[values.length];
-                for (int i = 0; i < values.length; i++) {
-                    data[i] = Double.parseDouble(values[i].trim());
-                }
-                return Arrays.copyOf(data, data.length);
-            } else if (value.matches("[-+]?\\d+(\\.\\d+)?([,\\s]+[-+]?\\d+(\\.\\d+)?)*")) {
-                String[] values = value.trim().split("[, ]+");
-                double[] data = new double[values.length];
-                for (int i = 0; i < values.length; i++) {
-                    data[i] = Double.parseDouble(values[i].trim());
-                }
-                return Arrays.copyOf(data, data.length);
-            } else {
-                throw new IllegalArgumentException("Invalid array format! Provide input like '[1,2]', '1,2', or '[[1,2],[3,4]]'.");
+                    return fData2D;
+                case DOUBLE:
+                    double[][] dData2D = new double[rowCount][];
+                    for (int i = 0; i < rowCount; i++) {
+                        String[] vals = rows[i].trim().split("[, ]+");
+                        dData2D[i] = new double[vals.length];
+                        for (int j = 0; j < vals.length; j++) {
+                            dData2D[i][j] = Double.parseDouble(vals[j]);
+                        }
+                    }
+                    return dData2D;
+                case INT:
+                default:
+                    int[][] iData2D = new int[rowCount][];
+                    for (int i = 0; i < rowCount; i++) {
+                        String[] vals = rows[i].trim().split("[, ]+");
+                        iData2D[i] = new int[vals.length];
+                        for (int j = 0; j < vals.length; j++) {
+                            iData2D[i][j] = Integer.parseInt(vals[j]);
+                        }
+                    }
+                    return iData2D;
             }
-        }
+        } else {
+            String[] vals = value.replaceAll("[\\[\\]]", "").trim().split("[, ]+");
 
-        public static void print(Object arr) {
-            if (arr instanceof double[]) {
-                System.out.println(Arrays.toString((double[]) arr));
-            } else if (arr instanceof double[][]) {
-                for (double[] row : (double[][]) arr) {
-                    System.out.println(Arrays.toString(row));
-                }
-            } else {
-                throw new IllegalArgumentException("Invalid array format! Must be 1D or 2D double array.");
+            switch (dtype) {
+                case FLOAT:
+                    float[] fData = new float[vals.length];
+                    for (int i = 0; i < vals.length; i++) fData[i] = Float.parseFloat(vals[i]);
+                    return fData;
+                case DOUBLE:
+                    double[] dData = new double[vals.length];
+                    for (int i = 0; i < vals.length; i++) dData[i] = Double.parseDouble(vals[i]);
+                    return dData;
+                case INT:
+                default:
+                    int[] iData = new int[vals.length];
+                    for (int i = 0; i < vals.length; i++) iData[i] = Integer.parseInt(vals[i]);
+                    return iData;
             }
-        }
-
-        private static double[][] deepCopy(double[][] source) {
-            double[][] copy = new double[source.length][];
-            for (int i = 0; i < source.length; i++) {
-                copy[i] = Arrays.copyOf(source[i], source[i].length);
-            }
-            return copy;
         }
     }
+
+    public static void print(Object arr) {
+        if (arr instanceof int[]) {
+            System.out.println(Arrays.toString((int[]) arr));
+        } else if (arr instanceof float[]) {
+            System.out.println(Arrays.toString((float[]) arr));
+        } else if (arr instanceof double[]) {
+            System.out.println(Arrays.toString((double[]) arr));
+        } else if (arr instanceof int[][]) {
+            for (int[] row : (int[][]) arr) System.out.println(Arrays.toString(row));
+        } else if (arr instanceof float[][]) {
+            for (float[] row : (float[][]) arr) System.out.println(Arrays.toString(row));
+        } else if (arr instanceof double[][]) {
+            for (double[] row : (double[][]) arr) System.out.println(Arrays.toString(row));
+        } else {
+            System.out.println("Unknown array format");
+        }
+    }
+}

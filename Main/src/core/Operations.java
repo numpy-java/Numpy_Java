@@ -5,114 +5,168 @@ import java.util.Random;
 
 public class Operations {
 
-    protected double[] temp1D;
-    protected double[][] temp2D;
-    protected float[] temp1DFloat;
-    protected float[][] temp2DFloat;
-    protected int[] temp1DInt;
-    protected int[][] temp2DInt;
-
-    public double[][] zeros(int row, int cols) {
-        ensure2DTemp(row, cols);
-        for (double[] r : temp2D) Arrays.fill(r, 0);
-        return deepCopy(temp2D);
+    public static Object zeros(int rows, int cols) {
+        return zeros(rows, cols, DType.INT);
     }
 
-    public double[] zeros(int row) {
-        if (temp1D == null || temp1D.length != row) temp1D = new double[row];
-        Arrays.fill(temp1D, 0);
-        return Arrays.copyOf(temp1D, temp1D.length);
+    public static Object zeros(int rows, int cols, DType dtype) {
+        switch (dtype) {
+            case FLOAT:
+                float[][] fz = new float[rows][cols];
+                for (float[] row : fz) Arrays.fill(row, 0f);
+                return fz;
+            case DOUBLE:
+                double[][] dz = new double[rows][cols];
+                for (double[] row : dz) Arrays.fill(row, 0.0);
+                return dz;
+            case INT:
+            default:
+                int[][] iz = new int[rows][cols];
+                for (int[] row : iz) Arrays.fill(row, 0);
+                return iz;
+        }
     }
 
-    public double[][] ones(int rows, int cols) {
-        ensure2DTemp(rows, cols);
-        for (double[] r : temp2D) Arrays.fill(r, 1);
-        return deepCopy(temp2D);
+    public static Object zeros(int rows) {
+        return zeros(rows, DType.INT);
     }
 
-    public double[] ones(int rows) {
-        if (temp1D == null || temp1D.length != rows) temp1D = new double[rows];
-        Arrays.fill(temp1D, 1);
-        return Arrays.copyOf(temp1D, temp1D.length);
+    public static Object zeros(int rows, DType dtype) {
+        switch (dtype) {
+            case FLOAT:
+                float[] fz = new float[rows];
+                Arrays.fill(fz, 0f);
+                return fz;
+            case DOUBLE:
+                double[] dz = new double[rows];
+                Arrays.fill(dz, 0.0);
+                return dz;
+            case INT:
+            default:
+                int[] iz = new int[rows];
+                Arrays.fill(iz, 0);
+                return iz;
+        }
     }
 
-    public double[][] full(int rows, int cols, int value) {
-        ensure2DTemp(rows, cols);
-        for (double[] r : temp2D) Arrays.fill(r, value);
-        return deepCopy(temp2D);
+    public static Object ones(int rows, int cols) {
+        return ones(rows, cols, DType.INT);
     }
 
-    public double[] full(int rows, int value) {
-        if (temp1D == null || temp1D.length != rows) temp1D = new double[rows];
-        Arrays.fill(temp1D, value);
-        return Arrays.copyOf(temp1D, temp1D.length);
+    public static Object ones(int rows, int cols, DType dtype) {
+        switch (dtype) {
+            case FLOAT:
+                float[][] fz = new float[rows][cols];
+                for (float[] row : fz) Arrays.fill(row, 1f);
+                return fz;
+            case DOUBLE:
+                double[][] dz = new double[rows][cols];
+                for (double[] row : dz) Arrays.fill(row, 1.0);
+                return dz;
+            case INT:
+            default:
+                int[][] iz = new int[rows][cols];
+                for (int[] row : iz) Arrays.fill(row, 1);
+                return iz;
+        }
     }
 
-    public double[] arange(int start, int stop, int step) {
-        int rows = (stop - start) / step + 1;
-        temp1D = new double[rows];
-        for (int i = 0; i < rows; i++) {
-            temp1D[i] = start;
+    public static Object ones(int rows) {
+        return ones(rows, DType.INT);
+    }
+
+    public static Object ones(int rows, DType dtype) {
+        switch (dtype) {
+            case FLOAT:
+                float[] fz = new float[rows];
+                Arrays.fill(fz, 1f);
+                return fz;
+            case DOUBLE:
+                double[] dz = new double[rows];
+                Arrays.fill(dz, 1.0);
+                return dz;
+            case INT:
+            default:
+                int[] iz = new int[rows];
+                Arrays.fill(iz, 1);
+                return iz;
+        }
+    }
+
+    public static Object full(int rows, int cols, int value) {
+        return full(rows, cols, value, DType.INT);
+    }
+
+    public static Object full(int rows, int cols, int value, DType dtype) {
+        switch (dtype) {
+            case FLOAT:
+                float[][] fz = new float[rows][cols];
+                for (float[] row : fz) Arrays.fill(row, (float) value);
+                return fz;
+            case DOUBLE:
+                double[][] dz = new double[rows][cols];
+                for (double[] row : dz) Arrays.fill(row, (double) value);
+                return dz;
+            case INT:
+            default:
+                int[][] iz = new int[rows][cols];
+                for (int[] row : iz) Arrays.fill(row, value);
+                return iz;
+        }
+    }
+
+    public static Object full(int rows, int value) {
+        return full(rows, value, DType.INT);
+    }
+
+    public static Object full(int rows, int value, DType dtype) {
+        switch (dtype) {
+            case FLOAT:
+                float[] fz = new float[rows];
+                Arrays.fill(fz, (float) value);
+                return fz;
+            case DOUBLE:
+                double[] dz = new double[rows];
+                Arrays.fill(dz, (double) value);
+                return dz;
+            case INT:
+            default:
+                int[] iz = new int[rows];
+                Arrays.fill(iz, value);
+                return iz;
+        }
+    }
+
+    public static int[] arange(int start, int stop, int step) {
+        int size = (stop - start) / step + 1;
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = start;
             start += step;
         }
-        return Arrays.copyOf(temp1D, rows);
+        return arr;
     }
 
-    public float[][] empty(int row, int cols) {
-        return new float[row][cols];
-    }
-
-    public float[] empty(int row) {
-        return new float[row];
-    }
-
-    public double[] linspace(double start, double stop, int num) {
-        temp1D = new double[num];
-        double diff = (stop - start) / (num - 1);
+    public static float[] linspace(float start, float stop, int num) {
+        float[] arr = new float[num];
+        float step = (stop - start) / (num - 1);
         for (int i = 0; i < num; i++) {
-            temp1D[i] = start;
-            start += diff;
+            arr[i] = start;
+            start += step;
         }
-        return Arrays.copyOf(temp1D, num);
+        return arr;
     }
 
-    public double[] logspace(double start, double stop, int num, double base) {
-        temp1D = new double[num];
-        double s = Math.pow(base, start);
-        double e = Math.pow(base, stop);
-        double diff = (e - s) / (num - 1);
+    public static double[] logspace(double start, double stop, int num, double base) {
+        double[] arr = new double[num];
+        double step = (stop - start) / (num - 1);
         for (int i = 0; i < num; i++) {
-            temp1D[i] = s;
-            s += diff;
+            arr[i] = Math.pow(base, start + i * step);
         }
-        return Arrays.copyOf(temp1D, num);
+        return arr;
     }
 
-    public float[][] eye(int row, int cols, int k) {
-        float[][] arr_eye = new float[row][cols];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < cols; j++) {
-                arr_eye[i][j] = (i == j - k) ? 1 : 0;
-            }
-        }
-        return arr_eye;
-    }
-
-    public float[][] eye(int row, int k) {
-        return eye(row, row, k);
-    }
-
-    public float[][] identity(int row) {
-        float[][] arr_identity = new float[row][row];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < row; j++) {
-                arr_identity[i][j] = (i == j) ? 1 : 0;
-            }
-        }
-        return arr_identity;
-    }
-
-    public int[][] random_randint(int low, int high, int rows, int cols) {
+    public static int[][] random_randint(int low, int high, int rows, int cols) {
         Random rand = new Random();
         int[][] matrix = new int[rows][cols];
         for (int i = 0; i < rows; i++)
@@ -121,7 +175,7 @@ public class Operations {
         return matrix;
     }
 
-    public int[] random_randint(int high, int size) {
+    public static int[] random_randint(int high, int size) {
         Random rand = new Random();
         int[] matrix = new int[size];
         for (int i = 0; i < size; i++)
@@ -129,27 +183,29 @@ public class Operations {
         return matrix;
     }
 
-    public float[][] ltri(int row, int cols, int k) {
-        float[][] arr_ltri = new float[row][cols];
-        for (int i = 0; i < row; i++) {
+    public static float[][] eye(int rows, int cols, int k) {
+        float[][] eye = new float[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            if (i - k >= 0 && i - k < cols) eye[i][i - k] = 1f;
+        }
+        return eye;
+    }
+
+    public static float[][] eye(int rows, int k) {
+        return eye(rows, rows, k);
+    }
+
+    public static float[][] identity(int rows) {
+        return eye(rows, 0);
+    }
+
+    public static float[][] ltri(int rows, int cols, int k) {
+        float[][] tri = new float[rows][cols];
+        for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                arr_ltri[i][j] = (i >= j - k) ? 1 : 0;
+                tri[i][j] = i >= j - k ? 1f : 0f;
             }
         }
-        return arr_ltri;
-    }
-
-    private void ensure2DTemp(int rows, int cols) {
-        if (temp2D == null || temp2D.length != rows || temp2D[0].length != cols) {
-            temp2D = new double[rows][cols];
-        }
-    }
-
-    private double[][] deepCopy(double[][] source) {
-        double[][] copy = new double[source.length][source[0].length];
-        for (int i = 0; i < source.length; i++) {
-            copy[i] = Arrays.copyOf(source[i], source[i].length);
-        }
-        return copy;
+        return tri;
     }
 }
