@@ -1,174 +1,266 @@
 package core;
 
-public class NumJava extends NumArray {
-    private Object data;
-    private DType dtype;
+import java.util.Arrays;
 
-    public NumJava(Object data) {
-        this.data = data;
-        if (data instanceof int[] || data instanceof int[][]) dtype = DType.INT;
-        else if (data instanceof float[] || data instanceof float[][]) dtype = DType.FLOAT;
-        else if (data instanceof double[] || data instanceof double[][]) dtype = DType.DOUBLE;
-        else throw new IllegalArgumentException("Unsupported array type.");
+public class NumJava extends NumArray {
+    private int[] int1D;
+    private int[][] int2D;
+
+    private float[] float1D;
+    private float[][] float2D;
+
+    private double[] double1D;
+    private double[][] double2D;
+
+    private DType dtype = DType.INT; // Default dtype
+
+    public NumJava() {}
+
+    public NumJava(int[] data) {
+        this.int1D = data;
+        this.dtype = DType.INT;
     }
 
-    public NumJava() {
-        // Empty constructor for instance-based API
+    public NumJava(int[][] data) {
+        this.int2D = data;
+        this.dtype = DType.INT;
+    }
+
+    public NumJava(float[] data) {
+        this.float1D = data;
+        this.dtype = DType.FLOAT;
+    }
+
+    public NumJava(float[][] data) {
+        this.float2D = data;
+        this.dtype = DType.FLOAT;
+    }
+
+    public NumJava(double[] data) {
+        this.double1D = data;
+        this.dtype = DType.DOUBLE;
+    }
+
+    public NumJava(double[][] data) {
+        this.double2D = data;
+        this.dtype = DType.DOUBLE;
     }
 
     public NumJava(String value) {
-        this(value, DType.INT); // Default
+        this(value, DType.INT); // Default dtype is INT
     }
 
     public NumJava(String value, DType dtype) {
         this.dtype = dtype;
-        this.data = NumArray.array(value, dtype);
+        Object result = NumArray.array(value, dtype);
+        switch (dtype) {
+            case INT:
+                if (result instanceof int[][]) this.int2D = (int[][]) result;
+                else this.int1D = (int[]) result;
+                break;
+            case FLOAT:
+                if (result instanceof float[][]) this.float2D = (float[][]) result;
+                else this.float1D = (float[]) result;
+                break;
+            case DOUBLE:
+                if (result instanceof double[][]) this.double2D = (double[][]) result;
+                else this.double1D = (double[]) result;
+                break;
+        }
     }
 
-    public NumJava from(String input) {
-        return new NumJava(input);
+    public NumJava T() {
+        switch (dtype) {
+            case INT:
+                if (int2D != null) {
+                    int rows = int2D.length, cols = int2D[0].length;
+                    int[][] transposed = new int[cols][rows];
+                    for (int i = 0; i < rows; i++)
+                        for (int j = 0; j < cols; j++)
+                            transposed[j][i] = int2D[i][j];
+                    this.int2D = transposed;
+                    this.int1D = null;
+                }
+                break;
+            case FLOAT:
+                if (float2D != null) {
+                    int rows = float2D.length, cols = float2D[0].length;
+                    float[][] transposed = new float[cols][rows];
+                    for (int i = 0; i < rows; i++)
+                        for (int j = 0; j < cols; j++)
+                            transposed[j][i] = float2D[i][j];
+                    this.float2D = transposed;
+                    this.float1D = null;
+                }
+                break;
+            case DOUBLE:
+                if (double2D != null) {
+                    int rows = double2D.length, cols = double2D[0].length;
+                    double[][] transposed = new double[cols][rows];
+                    for (int i = 0; i < rows; i++)
+                        for (int j = 0; j < cols; j++)
+                            transposed[j][i] = double2D[i][j];
+                    this.double2D = transposed;
+                    this.double1D = null;
+                }
+                break;
+        }
+        return this;
     }
 
     public NumJava reshape(int rows, int cols) {
-        if (data instanceof int[]) {
-            int[] d = (int[]) data;
-            if (d.length != rows * cols) throw new IllegalArgumentException("Size mismatch");
-            int[][] reshaped = new int[rows][cols];
-            for (int i = 0; i < d.length; i++) reshaped[i / cols][i % cols] = d[i];
-            data = reshaped;
-        } else if (data instanceof float[]) {
-            float[] d = (float[]) data;
-            if (d.length != rows * cols) throw new IllegalArgumentException("Size mismatch");
-            float[][] reshaped = new float[rows][cols];
-            for (int i = 0; i < d.length; i++) reshaped[i / cols][i % cols] = d[i];
-            data = reshaped;
-        } else if (data instanceof double[]) {
-            double[] d = (double[]) data;
-            if (d.length != rows * cols) throw new IllegalArgumentException("Size mismatch");
-            double[][] reshaped = new double[rows][cols];
-            for (int i = 0; i < d.length; i++) reshaped[i / cols][i % cols] = d[i];
-            data = reshaped;
+        switch (dtype) {
+            case INT:
+                if (int1D != null && rows * cols == int1D.length) {
+                    int[][] reshaped = new int[rows][cols];
+                    for (int i = 0; i < int1D.length; i++)
+                        reshaped[i / cols][i % cols] = int1D[i];
+                    this.int2D = reshaped;
+                    this.int1D = null;
+                }
+                break;
+            case FLOAT:
+                if (float1D != null && rows * cols == float1D.length) {
+                    float[][] reshaped = new float[rows][cols];
+                    for (int i = 0; i < float1D.length; i++)
+                        reshaped[i / cols][i % cols] = float1D[i];
+                    this.float2D = reshaped;
+                    this.float1D = null;
+                }
+                break;
+            case DOUBLE:
+                if (double1D != null && rows * cols == double1D.length) {
+                    double[][] reshaped = new double[rows][cols];
+                    for (int i = 0; i < double1D.length; i++)
+                        reshaped[i / cols][i % cols] = double1D[i];
+                    this.double2D = reshaped;
+                    this.double1D = null;
+                }
+                break;
+        }
+        return this;
+    }
+
+    public NumJava reshape(int size) {
+        switch (dtype) {
+            case INT:
+                if (int2D != null) {
+                    int total = int2D.length * int2D[0].length;
+                    if (size != total) throw new IllegalArgumentException("Invalid reshape size");
+                    int[] flat = new int[size];
+                    int idx = 0;
+                    for (int[] row : int2D)
+                        for (int val : row)
+                            flat[idx++] = val;
+                    this.int1D = flat;
+                    this.int2D = null;
+                }
+                break;
+            case FLOAT:
+                if (float2D != null) {
+                    int total = float2D.length * float2D[0].length;
+                    if (size != total) throw new IllegalArgumentException("Invalid reshape size");
+                    float[] flat = new float[size];
+                    int idx = 0;
+                    for (float[] row : float2D)
+                        for (float val : row)
+                            flat[idx++] = val;
+                    this.float1D = flat;
+                    this.float2D = null;
+                }
+                break;
+            case DOUBLE:
+                if (double2D != null) {
+                    int total = double2D.length * double2D[0].length;
+                    if (size != total) throw new IllegalArgumentException("Invalid reshape size");
+                    double[] flat = new double[size];
+                    int idx = 0;
+                    for (double[] row : double2D)
+                        for (double val : row)
+                            flat[idx++] = val;
+                    this.double1D = flat;
+                    this.double2D = null;
+                }
+                break;
         }
         return this;
     }
 
     public NumJava flatten() {
-        if (data instanceof int[][]) {
-            int[][] d = (int[][]) data;
-            int[] flat = new int[d.length * d[0].length];
-            int idx = 0;
-            for (int[] row : d) for (int val : row) flat[idx++] = val;
-            data = flat;
-        } else if (data instanceof float[][]) {
-            float[][] d = (float[][]) data;
-            float[] flat = new float[d.length * d[0].length];
-            int idx = 0;
-            for (float[] row : d) for (float val : row) flat[idx++] = val;
-            data = flat;
-        } else if (data instanceof double[][]) {
-            double[][] d = (double[][]) data;
-            double[] flat = new double[d.length * d[0].length];
-            int idx = 0;
-            for (double[] row : d) for (double val : row) flat[idx++] = val;
-            data = flat;
-        }
-        return this;
-    }
-
-    public NumJava T() {
-        if (data instanceof int[][]) {
-            int[][] a = (int[][]) data;
-            int[][] t = new int[a[0].length][a.length];
-            for (int i = 0; i < a.length; i++) for (int j = 0; j < a[0].length; j++) t[j][i] = a[i][j];
-            data = t;
-        } else if (data instanceof float[][]) {
-            float[][] a = (float[][]) data;
-            float[][] t = new float[a[0].length][a.length];
-            for (int i = 0; i < a.length; i++) for (int j = 0; j < a[0].length; j++) t[j][i] = a[i][j];
-            data = t;
-        } else if (data instanceof double[][]) {
-            double[][] a = (double[][]) data;
-            double[][] t = new double[a[0].length][a.length];
-            for (int i = 0; i < a.length; i++) for (int j = 0; j < a[0].length; j++) t[j][i] = a[i][j];
-            data = t;
-        }
+        if (dtype == DType.INT && int2D != null) return reshape(int2D.length * int2D[0].length);
+        if (dtype == DType.FLOAT && float2D != null) return reshape(float2D.length * float2D[0].length);
+        if (dtype == DType.DOUBLE && double2D != null) return reshape(double2D.length * double2D[0].length);
         return this;
     }
 
     public void print() {
-        NumArray.print(data);
+        switch (dtype) {
+            case INT:
+                if (int1D != null) NumArray.print(int1D);
+                else if (int2D != null) NumArray.print(int2D);
+                break;
+            case FLOAT:
+                if (float1D != null) NumArray.print(float1D);
+                else if (float2D != null) NumArray.print(float2D);
+                break;
+            case DOUBLE:
+                if (double1D != null) NumArray.print(double1D);
+                else if (double2D != null) NumArray.print(double2D);
+                break;
+        }
     }
 
-    public Object getArray() {
-        return data;
+
+   /* public static Object ones(int size, DType dtype) {
+        switch (dtype) {
+            case INT:
+                int[] iArr = new int[size];
+                Arrays.fill(iArr, 1);
+                return iArr;
+            case FLOAT:
+                float[] fArr = new float[size];
+                Arrays.fill(fArr, 1f);
+                return fArr;
+            case DOUBLE:
+                double[] dArr = new double[size];
+                Arrays.fill(dArr, 1.0);
+                return dArr;
+        }
+        throw new IllegalArgumentException("Unsupported dtype: " + dtype);
     }
+
+    public static Object ones(int rows, int cols, DType dtype) {
+        switch (dtype) {
+            case INT:
+                int[][] iArr2D = new int[rows][cols];
+                for (int[] row : iArr2D) Arrays.fill(row, 1);
+                return iArr2D;
+            case FLOAT:
+                float[][] fArr2D = new float[rows][cols];
+                for (float[] row : fArr2D) Arrays.fill(row, 1f);
+                return fArr2D;
+            case DOUBLE:
+                double[][] dArr2D = new double[rows][cols];
+                for (double[] row : dArr2D) Arrays.fill(row, 1.0);
+                return dArr2D;
+        }
+        throw new IllegalArgumentException("Unsupported dtype: " + dtype);
+    }*/
 
     public DType getDType() {
         return dtype;
     }
 
-    // Delegated instance methods for array creation
-    public static double[] zeros(int size) {
-        return (double[]) NumArray.zeros(size);
+    public Object getArray() {
+        switch (dtype) {
+            case INT:
+                return int1D != null ? int1D : int2D;
+            case FLOAT:
+                return float1D != null ? float1D : float2D;
+            case DOUBLE:
+                return double1D != null ? double1D : double2D;
+            default:
+                return null;
+        }
     }
-
-    public static double[][] zeros(int rows, int cols) {
-        return (double[][]) NumArray.zeros(rows, cols);
-    }
-
-    public static double[] ones(int size) {
-        return (double[]) NumArray.ones(size);
-    }
-
-    public static double[][] ones(int rows, int cols) {
-        return (double[][]) NumArray.ones(rows, cols);
-    }
-
-    public double[] full(int size, double value) {
-        return (double[]) NumArray.full(size, (int) value);
-    }
-
-   /* public double[][] full(int rows, int cols, double value) {
-        return NumArray.full(rows, cols, value);
-    }*/
-
-    public static int[] arange(int start, int stop, int step) {
-        return NumArray.arange(start, stop, step);
-    }
-
-    public static float[] linspace(float start, float end, int num) {
-        return NumArray.linspace(start, end, num);
-    }
-
-    public double[] logspace(double start, double end, int num, int base) {
-        return NumArray.logspace(start, end, num, base);
-    }
-
-    public static float[][] eye(int rows, int cols, int k) {
-        return NumArray.eye(rows, cols, k);
-    }
-
-    public static float[][] eye(int size, int k) {
-        return NumArray.eye(size, k);
-    }
-
-    public static float[][] identity(int size) {
-        return NumArray.identity(size);
-    }
-
-    public static int[][] random_randint(int low, int high, int rows, int cols) {
-        return NumArray.random_randint(low, high, rows, cols);
-    }
-
-    public static float[][] ltri(int rows, int cols, int k) {
-        return NumArray.ltri(rows, cols, k);
-    }
-/*
-    public double[] empty(int size) {
-        return NumArray.empty(size);
-    }
-
-    public double[][] empty(int rows, int cols) {
-        return NumArray.empty(rows, cols);
-    }*/
 }
